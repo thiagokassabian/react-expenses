@@ -56,6 +56,7 @@ const Expenses = (props: IExpensesProps) => {
 						rows={rows}
 						columns={columns}
 						getRowClassName={params => (params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd")}
+						disableColumnMenu
 					/>
 				</div>
 			</div>
