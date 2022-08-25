@@ -17,6 +17,15 @@ const StyledDataGrid = styled(DataGrid)(() => ({
 
 const Expenses = (props: IExpensesProps) => {
 	const { expenses } = props
+
+	const [sortModel, setSortModel] = useState<GridSortModel>([
+		{
+			field: "dia",
+			sort: "asc"
+		}
+	])
+	const [pageSize, setPageSize] = useState<number>(25)
+
 	const rows: GridRowsProp = expenses
 
 	const columns: GridColDef[] = [
@@ -32,13 +41,6 @@ const Expenses = (props: IExpensesProps) => {
 		}
 	]
 
-	const [sortModel, setSortModel] = useState<GridSortModel>([
-		{
-			field: "dia",
-			sort: "asc"
-		}
-	])
-
 	return (
 		<>
 			<div style={{ display: "flex", height: "100%" }}>
@@ -47,7 +49,10 @@ const Expenses = (props: IExpensesProps) => {
 						localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
 						sortModel={sortModel}
 						onSortModelChange={newSortModel => setSortModel(newSortModel)}
-						pageSize={25}
+						pageSize={pageSize}
+						onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+						rowsPerPageOptions={[10, 25, 50]}
+						pagination
 						rows={rows}
 						columns={columns}
 						getRowClassName={params => (params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd")}
