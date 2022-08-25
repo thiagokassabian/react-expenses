@@ -13,8 +13,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/despesas/:date" element={<ExpensesPage />} />
 				<Route path="*" element={<Navigate to={`/despesas/${actualYearMonth()}`} replace />} />
+				<Route path="/despesas/:date" element={<ExpensesPage />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>
