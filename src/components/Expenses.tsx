@@ -3,6 +3,7 @@ import { IExpense } from "../@types/expenses"
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridSortModel, ptBR } from "@mui/x-data-grid"
 import styled from "@emotion/styled"
 import { useState } from "react"
+import { Box } from "@mui/material"
 
 interface IExpensesProps {
 	expenses: IExpense[]
@@ -29,12 +30,13 @@ const Expenses = (props: IExpensesProps) => {
 	const rows: GridRowsProp = expenses
 
 	const columns: GridColDef[] = [
-		{ field: "dia", headerName: "Dia", flex: 0.5 },
-		{ field: "categoria", headerName: "Categoria", flex: 0.75 },
-		{ field: "descricao", headerName: "Descrição", flex: 1 },
+		{ field: "dia", headerName: "Dia", headerClassName: "super-app-theme--header", flex: 0.5 },
+		{ field: "categoria", headerName: "Categoria", headerClassName: "super-app-theme--header", flex: 0.75 },
+		{ field: "descricao", headerName: "Descrição", headerClassName: "super-app-theme--header", flex: 1 },
 		{
 			field: "valor",
 			headerName: "Valor",
+			headerClassName: "super-app-theme--header",
 			renderCell: (params: GridRenderCellParams<number>) => {
 				return params.value!.toLocaleString("pt-br", { style: "currency", currency: "BRL" })
 			}
@@ -43,8 +45,15 @@ const Expenses = (props: IExpensesProps) => {
 
 	return (
 		<>
-			<div style={{ display: "flex", height: "100%" }}>
-				<div style={{ flexGrow: 1 }}>
+			<Box sx={{ display: "flex", height: "100%" }}>
+				<Box
+					sx={{
+						flexGrow: 1,
+						"& .super-app-theme--header": {
+							backgroundColor: "#f1f1f1"
+						}
+					}}
+				>
 					<StyledDataGrid
 						localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
 						sortModel={sortModel}
@@ -58,8 +67,8 @@ const Expenses = (props: IExpensesProps) => {
 						getRowClassName={params => (params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd")}
 						disableColumnMenu
 					/>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</>
 	)
 }
