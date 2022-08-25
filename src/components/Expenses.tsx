@@ -20,7 +20,7 @@ const Expenses = (props: IExpensesProps) => {
 	const rows: GridRowsProp = expenses
 
 	const columns: GridColDef[] = [
-		{ field: "dia", headerName: "Dia", width: 90 },
+		{ field: "dia", headerName: "Dia", flex: 0.5 },
 		{ field: "categoria", headerName: "Categoria", flex: 0.75 },
 		{ field: "descricao", headerName: "Descrição", flex: 1 },
 		{
