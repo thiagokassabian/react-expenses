@@ -37,7 +37,7 @@ const Header = (props: IHeaderProps) => {
 		<>
 			{year && month && (
 				<Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-					<FormControl>
+					<FormControl sx={{ width: 70 }}>
 						<InputLabel id="select-year">Ano</InputLabel>
 						<Select variant="standard" labelId="select-year" value={year} label="Ano" onChange={event => handleChangeYear(event)}>
 							<MenuItem value="2020">2020</MenuItem>
@@ -45,7 +45,7 @@ const Header = (props: IHeaderProps) => {
 							<MenuItem value="2022">2022</MenuItem>
 						</Select>
 					</FormControl>
-					<FormControl sx={{ minWidth: 150 }}>
+					<FormControl sx={{ width: 100 }}>
 						<InputLabel id="select-month">Mês</InputLabel>
 						<Select variant="standard" labelId="select-month" value={month} label="Ano" onChange={handleChangeMonth}>
 							{MONTHS.map((month, i) => (
