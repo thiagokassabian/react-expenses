@@ -1,4 +1,4 @@
-import { Backdrop, Box, CircularProgress, Container, Paper, Typography } from "@mui/material"
+import { Backdrop, CircularProgress, Container, Paper, Typography } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { IExpense } from "../@types/expenses"
