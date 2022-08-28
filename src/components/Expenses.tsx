@@ -1,12 +1,12 @@
-import { IExpense } from "../@types/expenses"
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridSortModel, ptBR } from "@mui/x-data-grid"
 import styled from "@emotion/styled"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Box } from "@mui/material"
+import { ExpensesContext } from "../contexts/ExpensesContext"
 
-interface IExpensesProps {
-	expenses: IExpense[]
-}
+// interface IExpensesProps {
+// 	expenses: IExpense[]
+// }
 
 const StyledDataGrid = styled(DataGrid)(() => ({
 	border: 0,
@@ -15,8 +15,8 @@ const StyledDataGrid = styled(DataGrid)(() => ({
 	}
 }))
 
-const Expenses = (props: IExpensesProps) => {
-	const { expenses } = props
+const Expenses = () => {
+	const { state } = useContext(ExpensesContext)
 
 	const [sortModel, setSortModel] = useState<GridSortModel>([
 		{
@@ -26,7 +26,7 @@ const Expenses = (props: IExpensesProps) => {
 	])
 	const [pageSize, setPageSize] = useState<number>(25)
 
-	const rows: GridRowsProp = expenses
+	const rows: GridRowsProp = state.expenses
 
 	const columns: GridColDef[] = [
 		{ field: "dia", headerName: "Dia", headerClassName: "super-app-theme--header", flex: 0.5 },

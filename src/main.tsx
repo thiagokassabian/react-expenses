@@ -8,13 +8,21 @@ import "@fontsource/roboto/400.css"
 import "@fontsource/roboto/500.css"
 import "@fontsource/roboto/700.css"
 import "./index.css"
+import { ExpensesContextProvider } from "./contexts/ExpensesContext"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
 				<Route path="*" element={<Navigate to={`/despesas/${actualYearMonth()}`} replace />} />
-				<Route path="/despesas/:date" element={<ExpensesPage />} />
+				<Route
+					path="/despesas/:date"
+					element={
+						<ExpensesContextProvider>
+							<ExpensesPage />
+						</ExpensesContextProvider>
+					}
+				/>
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>

@@ -1,17 +1,17 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { ExpensesContext } from "../contexts/ExpensesContext"
 
 interface IHeaderProps {
-	sum: number
 	date: string
 }
 
 const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
 
 const Header = (props: IHeaderProps) => {
-	const { sum, date } = props
-
+	const { date } = props
+	const { state } = useContext(ExpensesContext)
 	const navigate = useNavigate()
 
 	const [year, setYear] = useState<string>()
@@ -55,7 +55,7 @@ const Header = (props: IHeaderProps) => {
 							))}
 						</Select>
 					</FormControl>
-					{!!sum && (
+					{!!state.sum && (
 						<Typography
 							variant="h6"
 							sx={{ marginLeft: "auto", textAlign: "right", display: "flex", flexDirection: "column", lineHeight: 1.25 }}
@@ -63,7 +63,7 @@ const Header = (props: IHeaderProps) => {
 							<Box component="span" sx={{ fontSize: ".9rem", fontWeight: 100 }}>
 								Despesa total
 							</Box>
-							<Box component="span">{sum.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</Box>
+							<Box component="span">{state.sum.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</Box>
 						</Typography>
 					)}
 				</Box>
