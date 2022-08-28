@@ -1,5 +1,5 @@
 export interface IExpense {
-	id?: number;
+	id: number;
 	descricao: string;
 	categoria: string;
 	valor: number;

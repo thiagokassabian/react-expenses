@@ -11,18 +11,18 @@ import "./styles.css"
 const ExpensesPage = () => {
 	const { date } = useParams()
 	const {
-		state: { expenses, loading }
+		state: { expenses, loading },
+		dispatch
 	} = useContext(ExpensesContext)
 
-	const { expenses: expensesHook, categories, sum } = useExpenses(date!)
+	//const { expenses: expensesHook, categories, sum } = useExpenses(date!)
 	// console.table(expensesHook)  //* Despesas
 	// console.log(`TOTAL: ${sum}`) //* Total
 	// console.table(categories) //* Categorias
 
-	//* Comentado para utilização do hook customizado
-	// useEffect(() => {
-	// 	getExpensesMonth(dispatch, date!).then(dispatch => dispatch())
-	// }, [date])
+	useEffect(() => {
+		getExpensesMonth(dispatch, date!).then(dispatch => dispatch())
+	}, [date])
 
 	return (
 		<>
