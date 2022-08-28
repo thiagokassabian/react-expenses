@@ -11,7 +11,9 @@ const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Jul
 
 const Header = (props: IHeaderProps) => {
 	const { date } = props
-	const { state } = useContext(ExpensesContext)
+	const {
+		state: { sum, loading }
+	} = useContext(ExpensesContext)
 	const navigate = useNavigate()
 
 	const [year, setYear] = useState<string>()
@@ -55,15 +57,16 @@ const Header = (props: IHeaderProps) => {
 							))}
 						</Select>
 					</FormControl>
-					{!!state.sum && (
+					{!loading && (
 						<Typography
 							variant="h6"
+							variantMapping={{ h6: "p" }}
 							sx={{ marginLeft: "auto", textAlign: "right", display: "flex", flexDirection: "column", lineHeight: 1.25 }}
 						>
 							<Box component="span" sx={{ fontSize: ".9rem", fontWeight: 100 }}>
 								Despesa total
 							</Box>
-							<Box component="span">{state.sum.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</Box>
+							<Box component="span">{sum.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</Box>
 						</Typography>
 					)}
 				</Box>

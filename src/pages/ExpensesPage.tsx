@@ -5,16 +5,24 @@ import Expenses from "../components/Expenses"
 import Header from "../components/Header"
 import { ExpensesContext } from "../contexts/ExpensesContext"
 import { getExpensesMonth } from "../contexts/ExpensesContext/actions"
+import useExpenses from "../hooks/useExpenses"
 import "./styles.css"
 
 const ExpensesPage = () => {
 	const { date } = useParams()
-	const { state, dispatch } = useContext(ExpensesContext)
-	const { loading, expenses } = state
+	const {
+		state: { expenses, loading }
+	} = useContext(ExpensesContext)
 
-	useEffect(() => {
-		getExpensesMonth(dispatch, date!).then(dispatch => dispatch())
-	}, [date])
+	const { expenses: expensesHook, categories, sum } = useExpenses(date!)
+	// console.table(expensesHook)  //* Despesas
+	// console.log(`TOTAL: ${sum}`) //* Total
+	// console.table(categories) //* Categorias
+
+	//* Comentado para utilização do hook customizado
+	// useEffect(() => {
+	// 	getExpensesMonth(dispatch, date!).then(dispatch => dispatch())
+	// }, [date])
 
 	return (
 		<>
@@ -34,7 +42,7 @@ const ExpensesPage = () => {
 				</Container>
 			</Paper>
 
-			<Container maxWidth="lg" sx={{ paddingY: 3, height: "calc(100% - 96px)" }}>
+			<Container maxWidth="lg" sx={{ paddingY: 3 /*, height: "calc(100% - 96px)"*/ }}>
 				{loading && (
 					<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={loading}>
 						<CircularProgress color="inherit" />

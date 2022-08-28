@@ -1,16 +1,17 @@
 import { createContext, Dispatch, ReactNode, useReducer } from "react"
-import { IExpense } from "../../@types/expenses"
+import { ICategory, IExpense } from "../../@types/expenses"
 import { reducer } from "./reducer"
-
-export interface IExpensesContextProps {
-	expenses: IExpense[]
-	sum: number
-	loading: boolean
-}
 
 export interface IExpensesAction {
 	type: string
 	payload?: any
+}
+
+export interface IExpensesContextProps {
+	expenses: IExpense[]
+	sum: number
+	categories: ICategory[]
+	loading: boolean
 }
 
 interface IExpenseContext {
@@ -21,6 +22,7 @@ interface IExpenseContext {
 const initialState: IExpensesContextProps = {
 	expenses: [],
 	sum: 0,
+	categories: [],
 	loading: false
 }
 

@@ -1,73 +1,56 @@
-import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridSortModel, ptBR } from "@mui/x-data-grid"
-import styled from "@emotion/styled"
-import { useContext, useState } from "react"
-import { Box } from "@mui/material"
-import { ExpensesContext } from "../contexts/ExpensesContext"
+import { SyntheticEvent, useState } from "react"
+import { Box, Typography } from "@mui/material"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import ExpensesDetails from "./ExpensesDetails"
+import ExpensesSummary from "./ExpensesSummary"
 
-// interface IExpensesProps {
-// 	expenses: IExpense[]
-// }
+interface TabPanelProps {
+	children?: React.ReactNode
+	index: number
+	value: number
+}
 
-const StyledDataGrid = styled(DataGrid)(() => ({
-	border: 0,
-	"& .even": {
-		backgroundColor: "#f9f9f9"
+function TabPanel(props: TabPanelProps) {
+	const { children, value, index, ...other } = props
+
+	return (
+		<div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+			{value === index && (
+				<Box sx={{ p: 3 }}>
+					<Typography component="div">{children}</Typography>
+				</Box>
+			)}
+		</div>
+	)
+}
+
+function a11yProps(index: number) {
+	return {
+		id: `simple-tab-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`
 	}
-}))
+}
 
 const Expenses = () => {
-	const { state } = useContext(ExpensesContext)
+	const [valueTabs, setValueTabs] = useState(0)
 
-	const [sortModel, setSortModel] = useState<GridSortModel>([
-		{
-			field: "dia",
-			sort: "asc"
-		}
-	])
-	const [pageSize, setPageSize] = useState<number>(25)
-
-	const rows: GridRowsProp = state.expenses
-
-	const columns: GridColDef[] = [
-		{ field: "dia", headerName: "Dia", headerClassName: "super-app-theme--header", flex: 0.5 },
-		{ field: "categoria", headerName: "Categoria", headerClassName: "super-app-theme--header", flex: 0.75 },
-		{ field: "descricao", headerName: "Descrição", headerClassName: "super-app-theme--header", flex: 1 },
-		{
-			field: "valor",
-			headerName: "Valor",
-			headerClassName: "super-app-theme--header",
-			renderCell: (params: GridRenderCellParams<number>) => {
-				return params.value!.toLocaleString("pt-br", { style: "currency", currency: "BRL" })
-			}
-		}
-	]
+	const handleChange = (event: SyntheticEvent, newValue: number) => {
+		setValueTabs(newValue)
+	}
 
 	return (
 		<>
-			<Box sx={{ display: "flex", height: "100%" }}>
-				<Box
-					sx={{
-						flexGrow: 1,
-						"& .super-app-theme--header": {
-							backgroundColor: "#f1f1f1"
-						}
-					}}
-				>
-					<StyledDataGrid
-						localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
-						sortModel={sortModel}
-						onSortModelChange={newSortModel => setSortModel(newSortModel)}
-						pageSize={pageSize}
-						onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-						rowsPerPageOptions={[10, 25, 50]}
-						pagination
-						rows={rows}
-						columns={columns}
-						getRowClassName={params => (params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd")}
-						disableColumnMenu
-					/>
-				</Box>
-			</Box>
+			<Tabs value={valueTabs} onChange={handleChange} centered>
+				<Tab label="Resumo" {...a11yProps(0)} />
+				<Tab label="Detalhes" {...a11yProps(0)} />
+			</Tabs>
+			<TabPanel value={valueTabs} index={0}>
+				<ExpensesSummary />
+			</TabPanel>
+			<TabPanel value={valueTabs} index={1}>
+				<ExpensesDetails />
+			</TabPanel>
 		</>
 	)
 }
