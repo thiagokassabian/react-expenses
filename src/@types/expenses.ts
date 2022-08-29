@@ -11,3 +11,8 @@ export interface ICategory {
 	categoria: string;
 	valor: number;
 }
+
+export interface IUser {
+	nome: string;
+	email: string;
+}

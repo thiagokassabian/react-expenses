@@ -1,5 +1,5 @@
 import { IExpense, ICategory } from './../@types/expenses';
-import { getExpenses, getExpensesMonth } from './../contexts/ExpensesContext/actions';
+import { getExpensesMonth } from './../contexts/ExpensesContext/actions';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { ExpensesContext } from '../contexts/ExpensesContext';
@@ -11,7 +11,7 @@ const useExpenses = (date: string) => {
 	const [categories, setCategories] = useState<ICategory[]>();
 
 	useEffect(() => {
-		getExpenses(date!).then(setExpenses); //* Apenas para utilização deste hook para atender solicitação do desafio 
+		// getExpenses(date!).then(setExpenses); //* Apenas para utilização deste hook para atender solicitação do desafio 
 		getExpensesMonth(dispatch, date!).then(dispatch => dispatch()); //* Colocando os mesmos dados no Contexto
 	}, [date]);
 

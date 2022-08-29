@@ -1,10 +1,10 @@
 import { Backdrop, CircularProgress, Container, Paper, Typography } from "@mui/material"
 import { useContext, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Outlet, useParams } from "react-router-dom"
 import Expenses from "../components/Expenses"
+import Toolbar from "../components/Toolbar"
 import Header from "../components/Header"
-import MenuAppBar from "../components/Toolbar"
-import { ExpensesContext } from "../contexts/ExpensesContext"
+import { ExpensesContext, ExpensesContextProvider } from "../contexts/ExpensesContext"
 import { getExpensesMonth } from "../contexts/ExpensesContext/actions"
 import "./styles.css"
 
@@ -27,7 +27,6 @@ const ExpensesPage = () => {
 
 	return (
 		<>
-			<MenuAppBar />
 			<Paper
 				elevation={4}
 				sx={{
@@ -40,11 +39,11 @@ const ExpensesPage = () => {
 				}}
 			>
 				<Container maxWidth="lg" sx={{ paddingY: 2 }}>
-					<Header date={date!} />
+					<Toolbar date={date!} />
 				</Container>
 			</Paper>
 
-			<Container maxWidth="lg" sx={{ paddingY: 3 /*, height: "calc(100% - 96px)"*/ }}>
+			<Container maxWidth="lg" sx={{ paddingY: 3 }}>
 				{loading && (
 					<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={loading}>
 						<CircularProgress color="inherit" />

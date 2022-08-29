@@ -1,4 +1,4 @@
-import { IExpense } from './../../@types/expenses';
+import { IExpense, IUser } from './../../@types/expenses';
 import { Dispatch } from "react";
 import { IExpensesAction } from ".";
 import { get } from "../../services/httpService";
@@ -13,7 +13,7 @@ export const getExpensesMonth = async (dispatch: Dispatch<IExpensesAction>, mont
 
 
 //* ACTION PARA UTILIZAÇÃO DO HOOK CUSTOMIZADO APENAS PARA ATENDER REQUISITOS DO DESAFIO
-export const getExpenses = async (month: string): Promise<IExpense[]> => {
-	const expenses = await get(`/despesas?mes=${month}&_sort=dia`);
-	return expenses;
-};
+// export const getExpenses = async (month: string): Promise<IExpense[]> => {
+// 	const expenses = await get(`/despesas?mes=${month}&_sort=dia`);
+// 	return expenses;
+// };
