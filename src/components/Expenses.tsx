@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react"
-import { Box, Typography } from "@mui/material"
+import { Box, styled, Typography } from "@mui/material"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import ExpensesDetails from "./ExpensesDetails"
@@ -32,6 +32,13 @@ function a11yProps(index: number) {
 	}
 }
 
+const StyledTabPanel = styled(TabPanel)({
+	"& .MuiBox-root": {
+		paddingLeft: 0,
+		paddingRight: 0
+	}
+})
+
 const Expenses = () => {
 	const [valueTabs, setValueTabs] = useState(0)
 
@@ -45,12 +52,12 @@ const Expenses = () => {
 				<Tab label="Resumo" {...a11yProps(0)} />
 				<Tab label="Detalhes" {...a11yProps(0)} />
 			</Tabs>
-			<TabPanel value={valueTabs} index={0}>
+			<StyledTabPanel value={valueTabs} index={0}>
 				<ExpensesSummary />
-			</TabPanel>
-			<TabPanel value={valueTabs} index={1}>
+			</StyledTabPanel>
+			<StyledTabPanel value={valueTabs} index={1}>
 				<ExpensesDetails />
-			</TabPanel>
+			</StyledTabPanel>
 		</>
 	)
 }

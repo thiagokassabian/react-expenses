@@ -3,9 +3,9 @@ import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Expenses from "../components/Expenses"
 import Header from "../components/Header"
+import MenuAppBar from "../components/Toolbar"
 import { ExpensesContext } from "../contexts/ExpensesContext"
 import { getExpensesMonth } from "../contexts/ExpensesContext/actions"
-import useExpenses from "../hooks/useExpenses"
 import "./styles.css"
 
 const ExpensesPage = () => {
@@ -15,6 +15,7 @@ const ExpensesPage = () => {
 		dispatch
 	} = useContext(ExpensesContext)
 
+	//* Utilização de hook customizado para atender requisitos do desafio
 	//const { expenses: expensesHook, categories, sum } = useExpenses(date!)
 	// console.table(expensesHook)  //* Despesas
 	// console.log(`TOTAL: ${sum}`) //* Total
@@ -26,6 +27,7 @@ const ExpensesPage = () => {
 
 	return (
 		<>
+			<MenuAppBar />
 			<Paper
 				elevation={4}
 				sx={{
@@ -37,7 +39,7 @@ const ExpensesPage = () => {
 					borderBottomRightRadius: 0
 				}}
 			>
-				<Container maxWidth="lg" sx={{ paddingY: 3 }}>
+				<Container maxWidth="lg" sx={{ paddingY: 2 }}>
 					<Header date={date!} />
 				</Container>
 			</Paper>
