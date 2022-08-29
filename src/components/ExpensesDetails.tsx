@@ -19,8 +19,8 @@ const ExpensesDetails = () => {
 			}
 		],
 		columns: [
-			{ field: "dia", headerName: "Dia", headerClassName: "super-app-theme--header", flex: 0.5 },
-			{ field: "categoria", headerName: "Categoria", headerClassName: "super-app-theme--header", flex: 0.75 },
+			{ field: "dia", headerName: "Dia", headerClassName: "super-app-theme--header" },
+			{ field: "categoria", headerName: "Categoria", headerClassName: "super-app-theme--header", flex: 0.8 },
 			{ field: "descricao", headerName: "Descrição", headerClassName: "super-app-theme--header", flex: 1 },
 			{
 				field: "valor",
